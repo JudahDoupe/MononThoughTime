@@ -17,28 +17,32 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)
-            || Input.GetKeyDown(KeyCode.D)
-            || Input.GetKeyDown(KeyCode.LeftArrow)
-            || Input.GetKeyDown(KeyCode.RightArrow))
+        if (State == GameState.Ready)
         {
-            switch (State)
+            if (Input.GetKeyDown(KeyCode.A)
+                || Input.GetKeyDown(KeyCode.D)
+                || Input.GetKeyDown(KeyCode.LeftArrow)
+                || Input.GetKeyDown(KeyCode.RightArrow))
             {
-                case GameState.Ready:
-                    StartGame();
-                    break;
-                case GameState.Dead:
-                    ResetGame();
-                    break;
+
+                StartGame();
             }
         }
-
-        if (State == GameState.Running)
+        else if (State == GameState.Dead)
+        {
+            if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+            {
+                ResetGame();
+            }
+        }
+        else if (State == GameState.Running)
         {
             foreach (var dimension in DimensionPicker.AllDimensions)
             {
                 dimension.chunkSpeed += Acceleration * Time.deltaTime;
             }
+
+            Stats.Distance += DimensionPicker.CurrentDimension.chunkSpeed * Time.deltaTime;
         }
     }
 
@@ -77,6 +81,8 @@ public class GameController : MonoBehaviour
             dimension.GetComponent<AudioSource>().Stop();
         }
         FindObjectOfType<Brainard>().ResetPlayer();
+        Stats.DimensionChanges = 0;
+        Stats.Distance = 0;
     }
 
     public enum GameState

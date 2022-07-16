@@ -56,6 +56,8 @@ public class DimensionPicker : MonoBehaviour
         currentAudio.time = currentTime;
 
         PositionDimensions();
+
+        Stats.DimensionChanges++;
     }
 
     private static void PositionDimensions()

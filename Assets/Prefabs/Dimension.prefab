@@ -52,6 +52,7 @@ MonoBehaviour:
   maxChunks: 9
   chunkSpeed: 15
   despawnThreshold: -15
+  chunkSize: 15
 --- !u!82 &7211323293338373432
 AudioSource:
   m_ObjectHideFlags: 0

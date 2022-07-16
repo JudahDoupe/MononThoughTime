@@ -19,10 +19,10 @@ public class Dimension : MonoBehaviour
 
   private void spawnChunk()
   {
-    var chunkType = Random.Range(-1, 1);
+    var chunkType = Random.Range(-1, 5);
     print(chunkType.ToString());
     
-    var chunk = chunkType == 0
+    var chunk = chunkType >= 0
       ? Instantiate(chunkPrefab[0], transform)
       : Instantiate(dangerChunkPrefab[0], transform);
     chunk.transform.localPosition = NextSpawnPosition();

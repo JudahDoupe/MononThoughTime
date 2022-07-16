@@ -62,9 +62,11 @@ public class DimensionPicker : MonoBehaviour
     {
         for (var i = 0; i < DimensionCount; i++)
         {
-            var dimensionIndex = (i + CurrentDimensionIndex) % DimensionCount;
-            var position = Vector3.right * (i - (DimensionCount / 2)) * _instance.DimensionDistance;
-            AllDimensions[dimensionIndex].transform.position = position;
+            var halfDimensionCount = DimensionCount / 2;
+            var offset = (i - CurrentDimensionIndex + DimensionCount + halfDimensionCount) % DimensionCount - halfDimensionCount;
+            
+            var position = Vector3.right * offset * _instance.DimensionDistance;
+            AllDimensions[i].transform.position = position;
         }
     } 
 }

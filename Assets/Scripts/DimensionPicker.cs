@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DimensionPicker : MonoBehaviour
@@ -12,15 +13,17 @@ public class DimensionPicker : MonoBehaviour
     public static int DimensionCount => _instance.Dimensions.Length;
     public static int CurrentDimensionIndex { get; private set; } = 0;
 
-    void Start()
+    void Awake()
     {
         _instance = this;
-        PickDimension(CurrentDimensionIndex);
+        PositionDimensions();
     }
 
     void Update()
     {
-        Dimensions = transform.GetComponentsInChildren<Dimension>();
+        if (GameController.State != GameController.GameState.Running) 
+            return;
+
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             NextDimension();
 
@@ -28,19 +31,19 @@ public class DimensionPicker : MonoBehaviour
             PreviousDimension();
     }
 
-    public void NextDimension()
+    public static void NextDimension()
     {
         var newDimension = (CurrentDimensionIndex + 1) % DimensionCount;
         PickDimension(newDimension);
     }
 
-    public void PreviousDimension()
+    public static void PreviousDimension()
     {
         var newDimension = (DimensionCount + (CurrentDimensionIndex - 1)) % DimensionCount;
         PickDimension(newDimension);
     }
 
-    public void PickDimension(int index)
+    public static void PickDimension(int index)
     {
         var currentAudio = CurrentDimension.GetComponent<AudioSource>();
         var currentTime = currentAudio.time;
@@ -52,12 +55,16 @@ public class DimensionPicker : MonoBehaviour
         currentAudio.Play();
         currentAudio.time = currentTime;
 
+        PositionDimensions();
+    }
+
+    private static void PositionDimensions()
+    {
         for (var i = 0; i < DimensionCount; i++)
         {
             var dimensionIndex = (i + CurrentDimensionIndex) % DimensionCount;
-            var position = Vector3.right * (i - (DimensionCount / 2)) * DimensionDistance;
-            Dimensions[dimensionIndex].transform.position = position;
+            var position = Vector3.right * (i - (DimensionCount / 2)) * _instance.DimensionDistance;
+            AllDimensions[dimensionIndex].transform.position = position;
         }
-    }
-
+    } 
 }

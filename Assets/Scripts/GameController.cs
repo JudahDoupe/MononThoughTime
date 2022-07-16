@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour
             dimension.chunkSpeed = 0;
             dimension.GetComponent<AudioSource>().Stop();
         }
-        FindObjectOfType<Brainard>().HP = 3;
+        FindObjectOfType<Brainard>().ResetPlayer();
     }
 
     public enum GameState

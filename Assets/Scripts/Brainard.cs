@@ -1,19 +1,24 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Brainard : MonoBehaviour
 {
-  // Start is called before the first frame update
-  public long test = 111;
-  public List<int> yo;
+    public int HP = 3;
 
-  private void Start()
-  {
-    yo = new List<int> {1, 1, 1, 1};
-  }
 
-  // Update is called once per frame
-  private void Update()
-  {
-  }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Hazard"))
+        {
+            TakeDamage();
+        }
+    }
+
+    private void TakeDamage()
+    {
+        HP--;
+        if (HP <= 0)
+        {
+            FindObjectOfType<GameController>().EndGame();
+        }
+    }
 }

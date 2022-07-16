@@ -367,6 +367,7 @@ GameObject:
   - component: {fileID: 741507723}
   - component: {fileID: 741507722}
   - component: {fileID: 741507724}
+  - component: {fileID: 741507725}
   m_Layer: 0
   m_Name: MotherChunker
   m_TagString: Untagged
@@ -423,6 +424,18 @@ MonoBehaviour:
   - {fileID: 2127027077}
   - {fileID: 1018273364}
   ActiveDimension: 0
+--- !u!114 &741507725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741507721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6257cb819da1dd4abe234ffdf979bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &756926065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -520,6 +533,7 @@ GameObject:
   - component: {fileID: 798594525}
   - component: {fileID: 798594524}
   - component: {fileID: 798594528}
+  - component: {fileID: 798594529}
   m_Layer: 0
   m_Name: Brainard
   m_TagString: Untagged
@@ -618,8 +632,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a0044cab148f4b3db97ae47b1f7b379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: 111
-  yo: 00000000
+  HP: 3
+--- !u!54 &798594529
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798594523}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

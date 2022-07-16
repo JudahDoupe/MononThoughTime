@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class DimensionPicker : MonoBehaviour
 {
+    private static DimensionPicker _instance;
+
     public float DimensionDistance = 50;
     public Dimension[] Dimensions;
-    public int DimensionCount => Dimensions.Length;
-    public int ActiveDimension = 0;
+
+    public static Dimension[] AllDimensions => _instance.Dimensions;
+    public static Dimension CurrentDimension => _instance.Dimensions[CurrentDimensionIndex];
+    public static int DimensionCount => _instance.Dimensions.Length;
+    public static int CurrentDimensionIndex { get; private set; } = 0;
 
     void Start()
     {
-        PickDimension(ActiveDimension);
+        _instance = this;
+        PickDimension(CurrentDimensionIndex);
     }
 
     void Update()
@@ -27,30 +30,34 @@ public class DimensionPicker : MonoBehaviour
 
     public void NextDimension()
     {
-        var newDimension = (ActiveDimension + 1) % DimensionCount;
+        var newDimension = (CurrentDimensionIndex + 1) % DimensionCount;
         PickDimension(newDimension);
     }
 
     public void PreviousDimension()
     {
-        var newDimension = (DimensionCount + (ActiveDimension - 1)) % DimensionCount;
+        var newDimension = (DimensionCount + (CurrentDimensionIndex - 1)) % DimensionCount;
         PickDimension(newDimension);
     }
 
-    public void PickDimension(int dimensionIndex)
+    public void PickDimension(int index)
     {
-        ActiveDimension = dimensionIndex;
-        PositionDimensions();
-        GetComponent<MotherChunker>().OnDimensionChange(Dimensions[dimensionIndex].gameObject);
-    }
+        var currentAudio = CurrentDimension.GetComponent<AudioSource>();
+        var currentTime = currentAudio.time;
+        currentAudio.Stop();
 
-    private void PositionDimensions()
-    {
+        CurrentDimensionIndex = index;
+
+        currentAudio = CurrentDimension.GetComponent<AudioSource>();
+        currentAudio.Play();
+        currentAudio.time = currentTime;
+
         for (var i = 0; i < DimensionCount; i++)
         {
-            var dimensionIndex = (i + ActiveDimension) % DimensionCount;
+            var dimensionIndex = (i + CurrentDimensionIndex) % DimensionCount;
             var position = Vector3.right * (i - (DimensionCount / 2)) * DimensionDistance;
             Dimensions[dimensionIndex].transform.position = position;
         }
     }
+
 }

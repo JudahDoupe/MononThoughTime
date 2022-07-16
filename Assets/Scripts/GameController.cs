@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MotherChunker : MonoBehaviour
+public class GameController : MonoBehaviour
 {
-    void Start()
+    public void StartGame()
     {
 
     }
 
-    void Update()
+    public void EndGame()
     {
 
     }

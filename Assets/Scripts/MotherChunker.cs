@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MotherChunker : MonoBehaviour
 {
-    public float CurrentAudioTime;
-    private float ClipLength = 19.492f;
     public GameObject ActiveDimension;
 
     void Start()
@@ -16,14 +14,14 @@ public class MotherChunker : MonoBehaviour
 
     void Update()
     {
-        CurrentAudioTime = Time.deltaTime / ClipLength;
     }
 
-    void OnDimensionChange(GameObject newDimension)
+    public void OnDimensionChange(GameObject newDimension)
     {
+        var currentTime = ActiveDimension.GetComponent<AudioSource>().time;
         ActiveDimension.GetComponent<AudioSource>().Stop();
         ActiveDimension = newDimension;
-        ActiveDimension.GetComponent<AudioSource>().time = CurrentAudioTime;
         ActiveDimension.GetComponent<AudioSource>().Play();
+        ActiveDimension.GetComponent<AudioSource>().time = currentTime;
     }
 }

@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class DimensionPicker : MonoBehaviour
 {
-    public List<GameObject> Dimensions;
-    public int DimensionCount => Dimensions.Count;
-    public int ActiveDimension = 0;
     public float DimensionDistance = 50;
+    public Dimension[] Dimensions;
+    public int DimensionCount => Dimensions.Length;
+    public int ActiveDimension = 0;
 
     void Start()
     {
@@ -17,10 +17,11 @@ public class DimensionPicker : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        Dimensions = transform.GetComponentsInChildren<Dimension>();
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             NextDimension();
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             PreviousDimension();
     }
 
@@ -40,6 +41,7 @@ public class DimensionPicker : MonoBehaviour
     {
         ActiveDimension = dimensionIndex;
         PositionDimensions();
+        GetComponent<MotherChunker>().OnDimensionChange(Dimensions[dimensionIndex].gameObject);
     }
 
     private void PositionDimensions()

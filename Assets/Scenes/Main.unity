@@ -1204,14 +1204,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxChunks: 10
-  ChunkSpeed: 20
+  ChunkSpeed: 30
   DespawnThreshold: -15
   ChunkSize: 15
   DeathRatio: 0.4
   MinimumValidPaths: 2
   MinimumVerticalSegments: 2
   MaxWhileLoopIters: 50
-
 --- !u!4 &741507723
 Transform:
   m_ObjectHideFlags: 0

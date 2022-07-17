@@ -1828,15 +1828,49 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}
+      propertyPath: chunkPrefab.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
       propertyPath: chunkPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 1777988766293584529, guid: cae531535a73f43478f8854ba3afa44d,
+        type: 3}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: chunkPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 1777988766293584529, guid: a0021b224cc71ca4f969c0c5f03fe7f3,
+        type: 3}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: chunkPrefab.Array.data[2]
       value: 
       objectReference: {fileID: 1777988766293584529, guid: f9ca5b19ba826ea43b687ba0c0df5a9a,
         type: 3}
     - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}
+      propertyPath: dangerChunkPrefab.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
       propertyPath: dangerChunkPrefab.Array.data[0]
       value: 
-      objectReference: {fileID: 1777988766293584529, guid: b4f1214558b8e8649824fc322d2f795a,
+      objectReference: {fileID: 1777988766293584529, guid: 9643c8df9fff97344a752bea80ab8d38,
+        type: 3}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: dangerChunkPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 1777988766293584529, guid: 84e13cff8c3a91d4d8cc096b6b775a6e,
+        type: 3}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: dangerChunkPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 1777988766293584529, guid: faeb1534685a360499a888dde9a001ef,
         type: 3}
     - target: {fileID: 7560620248613371141, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}
@@ -2849,15 +2883,49 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}
+      propertyPath: chunkPrefab.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
       propertyPath: chunkPrefab.Array.data[0]
       value: 
-      objectReference: {fileID: 1777988766293584529, guid: f624f47f1c6073e489c7d2ce7310da79,
+      objectReference: {fileID: 1777988766293584529, guid: 12b762aa0c8f86d45929724c3f0a5af8,
         type: 3}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: chunkPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 1777988766293584529, guid: f77c7f6385bf8e741ae5b1a94c673916,
+        type: 3}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: chunkPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 1777988766293584529, guid: af3b256d20f1460419a06acc84da6eb9,
+        type: 3}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: dangerChunkPrefab.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}
       propertyPath: dangerChunkPrefab.Array.data[0]
       value: 
-      objectReference: {fileID: 1777988766293584529, guid: 7973301ff3ea014459103ee2e8ae8cf6,
+      objectReference: {fileID: 1777988766293584529, guid: a49cd58fa81089d429f19996acf6c64a,
+        type: 3}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: dangerChunkPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 1777988766293584529, guid: 2f3ecd61fd58d584b9deaf6b74cba025,
+        type: 3}
+    - target: {fileID: 7560620248613371140, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: dangerChunkPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 1777988766293584529, guid: 507179628bd31824d9cac8330f65e69b,
         type: 3}
     - target: {fileID: 7560620248613371141, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}

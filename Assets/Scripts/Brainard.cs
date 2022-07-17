@@ -36,6 +36,7 @@ public class Brainard : MonoBehaviour
 
     public void ResetPlayer()
     {
+        StopAllCoroutines();
         HP = Hearts.Count;
         UpdateVisualization();
         transform.localEulerAngles = Vector3.zero;
@@ -89,20 +90,24 @@ public class Brainard : MonoBehaviour
         var t = 0f;
         while (t < 1)
         {
-            transform.localEulerAngles = new Vector3(1 - EaseInElastic(t) * 180, 0, 1 - EaseInElastic(t + 0.2f) * 180);
+            transform.localEulerAngles = new Vector3(EaseOutElastic(t) * 90, 0, EaseOutElastic(t) * 30);
             yield return new WaitForEndOfFrame();
             t += Time.deltaTime * FallSpeed;
         }
+        transform.localEulerAngles = new Vector3(90,0,30);
     }
 
     private float EaseInElastic(float t)
     {
+        return 1 - EaseOutElastic(t);
+    }
+    private float EaseOutElastic(float t)
+    {
         var c4 = (2f * math.PI) / 3f;
-        var easeOut=  t == 0
+        return t == 0
             ? 0f
             : Math.Abs(t - 1) < 0.0001f
                 ? 1
                 : math.pow(2f, -10f * t) * math.sin((t * 10f - 0.75f) * c4) + 1;
-        return 1 - easeOut;
     }
 }

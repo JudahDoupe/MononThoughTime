@@ -1376,7 +1376,7 @@ MonoBehaviour:
   StumbleSpeed: 0.5
   StumbleExaggerate: 50
   StumbleSound: {fileID: 798594531}
-  FallSpeed: 1
+  FallSpeed: 0.5
   FallSound: {fileID: 798594530}
 --- !u!54 &798594529
 Rigidbody:

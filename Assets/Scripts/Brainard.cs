@@ -1,52 +1,108 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Brainard : MonoBehaviour
 {
+    [Header("Health")]
     public int HP = 3;
-    public float DamageFlashSpeed = 3;
 
-    private Color _startingColor;
-    private float _colorLerp = 0;
-    private float _colorLerpT = 0;
+    [Header("Health Visualization")]
+    public List<Image> Hearts;
+    public Sprite FullHeart;
+    public Sprite EmptyHeart;
+
+    [Header("Stumble")]
+    public float StumbleSpeed = 1;
+    public float StumbleExaggerate = 10;
+    public AudioSource StumbleSound;
+
+    [Header("Fall")]
+    public float FallSpeed = 1;
+    public AudioSource FallSound;
+
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Hazard"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Hazard") 
+            && GameController.State == GameController.GameState.Running)
         {
             TakeDamage();
         }
     }
 
-    void Start()
-    {
-        _startingColor = GetComponent<Renderer>().material.color;
-    }
-
-    void Update()
-    {
-        _colorLerpT += Time.deltaTime * DamageFlashSpeed;
-        _colorLerp = HP switch
-        {
-            3 => 0,
-            2 => Mathf.PingPong(_colorLerpT, 1),
-            _ => 1,
-        };
-
-        GetComponent<Renderer>().material.color = Color.Lerp(_startingColor, Color.red, _colorLerp);
-    }
-
     public void ResetPlayer()
     {
-        HP = 3;
+        HP = Hearts.Count;
+        UpdateVisualization();
+        transform.localEulerAngles = Vector3.zero;
     }
 
     private void TakeDamage()
     {
         HP--;
-        _colorLerpT = 0;
+        UpdateVisualization();
         if (HP <= 0)
         {
             FindObjectOfType<GameController>().EndGame();
+            StopAllCoroutines();
+            StartCoroutine(Fall());
         }
+        else
+        {
+            StopAllCoroutines();
+            StartCoroutine(Stumble());
+        }
+    }
+
+    private void UpdateVisualization()
+    {
+        for (var i = 0; i < Hearts.Count; i++)
+        {
+            Hearts[i].sprite = i < HP
+                ? FullHeart
+                : EmptyHeart;
+        }
+    }
+
+
+    private IEnumerator Stumble()
+    {
+        StumbleSound.Play();
+        var t = 0f;
+        while (t < 1)
+        {
+            transform.localEulerAngles = new Vector3(EaseInElastic(t) * StumbleExaggerate, 0, EaseInElastic(t+ 0.2f) * StumbleExaggerate);
+            yield return new WaitForEndOfFrame();
+            t += Time.deltaTime * StumbleSpeed;
+        }
+
+        transform.localEulerAngles = Vector3.zero;
+    }
+
+    private IEnumerator Fall()
+    {
+        FallSound.Play();
+        var t = 0f;
+        while (t < 1)
+        {
+            transform.localEulerAngles = new Vector3(1 - EaseInElastic(t) * 180, 0, 1 - EaseInElastic(t + 0.2f) * 180);
+            yield return new WaitForEndOfFrame();
+            t += Time.deltaTime * FallSpeed;
+        }
+    }
+
+    private float EaseInElastic(float t)
+    {
+        var c4 = (2f * math.PI) / 3f;
+        var easeOut=  t == 0
+            ? 0f
+            : Math.Abs(t - 1) < 0.0001f
+                ? 1
+                : math.pow(2f, -10f * t) * math.sin((t * 10f - 0.75f) * c4) + 1;
+        return 1 - easeOut;
     }
 }

@@ -35,7 +35,7 @@ public class DimensionPicker : MonoBehaviour
 
         foreach (var (dimension, targetPosition) in _targetPositions)
         {
-            dimension.transform.localPosition = Vector3.Lerp(dimension.transform.localPosition, targetPosition, Time.deltaTime * SwitchSpeed);
+            dimension.transform.localPosition = Vector3.Lerp(dimension.transform.localPosition, targetPosition, Time.deltaTime * SwitchSpeed * GameController.GameSpeed);
         }
     }
 

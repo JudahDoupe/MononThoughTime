@@ -359,9 +359,10 @@ public class MotherChunker : MonoBehaviour
   void SlideChunks(Dimension dimension)
   {
     foreach (var chunk in dimension.ActiveChunks)
-    {
-      chunk.transform.localPosition =
-        new Vector3(0, 0, chunk.transform.localPosition.z - Time.deltaTime * ChunkSpeed);
+    { 
+      var distance = Time.deltaTime * ChunkSpeed * GameController.GameSpeed;
+      chunk.transform.localPosition -= new Vector3(0, 0, distance);
+      Stats.Distance += distance;
     }
   }
 

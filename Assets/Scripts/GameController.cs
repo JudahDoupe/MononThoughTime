@@ -37,12 +37,10 @@ public class GameController : MonoBehaviour
         }
         else if (State == GameState.Running)
         {
-            foreach (var dimension in DimensionPicker.AllDimensions)
-            {
-                dimension.chunkSpeed += Acceleration * Time.deltaTime;
-            }
+            GetComponent<MotherChunker>().ChunkSpeed += Acceleration * Time.deltaTime;
 
             Stats.Distance += DimensionPicker.CurrentDimension.chunkSpeed * Time.deltaTime;
+
         }
     }
 
@@ -51,10 +49,9 @@ public class GameController : MonoBehaviour
         EndScreen.SetActive(false);
         StartScreen.SetActive(false);
         State = GameState.Running;
-        foreach (var dimension in DimensionPicker.AllDimensions)
-        {
-            dimension.chunkSpeed = StartingSpeed;
-        }
+
+        GetComponent<MotherChunker>().ChunkSpeed = StartingSpeed;
+        
         DimensionPicker.PickDimension(DimensionPicker.CurrentDimensionIndex);
     }
 
@@ -63,9 +60,9 @@ public class GameController : MonoBehaviour
         EndScreen.SetActive(true);
         StartScreen.SetActive(false);
         State = GameState.Dead;
+        GetComponent<MotherChunker>().ChunkSpeed = 0;
         foreach (var dimension in DimensionPicker.AllDimensions)
         {
-            dimension.chunkSpeed = 0;
             dimension.GetComponent<AudioSource>().Stop();
         }
     }
@@ -75,9 +72,9 @@ public class GameController : MonoBehaviour
         EndScreen.SetActive(false);
         StartScreen.SetActive(true);
         State = GameState.Ready;
+        GetComponent<MotherChunker>().ChunkSpeed = 0;
         foreach (var dimension in DimensionPicker.AllDimensions)
         {
-            dimension.chunkSpeed = 0;
             dimension.GetComponent<AudioSource>().Stop();
         }
         FindObjectOfType<Brainard>().ResetPlayer();

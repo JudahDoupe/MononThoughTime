@@ -22,6 +22,8 @@ public class MotherChunker : MonoBehaviour
   public float ChunkSize = 15;
   public float DeathRatio = 0.4f;
   public int MinimumValidPaths = 2;
+  public int MinimumVerticalSegments = 3;
+  public int MaxWhileLoopIters = 50;
 
 
   List<int2> GetNeighbors(int2 point, Dictionary<int2, bool> chunkMap)
@@ -104,7 +106,7 @@ public class MotherChunker : MonoBehaviour
     while (frontier.Count > 0)
     {
       inter++;
-      if (inter > 500)
+      if (inter > MaxWhileLoopIters)
       {
         print("loop 3");
         break;
@@ -152,7 +154,7 @@ public class MotherChunker : MonoBehaviour
     while (!current.Equals(new int2(-1, -1)) || !current.Equals(start.position))
     {
       inter++;
-      if (inter > 500)
+      if (inter > MaxWhileLoopIters)
       {
         print("loop 4");
         break;
@@ -245,7 +247,7 @@ public class MotherChunker : MonoBehaviour
     while (row.Count < DimensionPicker.DimensionCount)
     {
       inter++;
-      if (inter > 500)
+      if (inter > MaxWhileLoopIters)
       {
         print("loop 1");
         break;
@@ -268,7 +270,7 @@ public class MotherChunker : MonoBehaviour
     while (!isValidRow)
     {
       inter++;
-      if (inter > 500)
+      if (inter > MaxWhileLoopIters)
       {
         print("loop 2");
       }
@@ -308,11 +310,81 @@ public class MotherChunker : MonoBehaviour
       }
 
 
-      if (validPaths.Count >= MinimumValidPaths)
+
+
+      var failedVerticalCheck = false;
+      foreach (var path in validPaths)
       {
-        validRow = newRow;
-        isValidRow = true;
+        if (failedVerticalCheck)
+        {
+          break;
+        }
+        var totalVerticalPoints = 0;
+        var currentVerticalAxis = -1;
+        
+        foreach (var point in path)
+        {
+          if (currentVerticalAxis == -1)
+          {
+            currentVerticalAxis = point.x;
+            totalVerticalPoints = 1;
+            continue;
+          }
+          
+          if (currentVerticalAxis == point.x)
+          {
+            totalVerticalPoints++;
+            continue;
+          }
+
+          if (currentVerticalAxis != point.x)
+          {
+            if (totalVerticalPoints == 1)
+            {
+              currentVerticalAxis = point.x;
+              continue;
+            }
+
+            if (totalVerticalPoints >= 2 && totalVerticalPoints > MinimumVerticalSegments)
+            {
+              totalVerticalPoints = 1;
+              currentVerticalAxis = point.x;
+              continue;
+            }
+            
+            if ( totalVerticalPoints>=2 && totalVerticalPoints < MinimumVerticalSegments)
+            {
+              failedVerticalCheck = true;
+              break;
+            }
+            
+            
+          }
+        }
       }
+
+      if (failedVerticalCheck)
+      {
+        continue;
+      }
+
+      var hasStraightPaths =  validPaths.Any(x => x.Count == MaxChunks);
+      if (hasStraightPaths)
+      {
+        continue;
+      }
+      
+      
+      if (validPaths.Count < MinimumValidPaths)
+      {
+        continue;
+      }
+      
+      //check that the paths have minimum vertical segments
+      //check for minimum hoortizontal segments
+      //diagnal segements threshold
+      validRow = newRow;
+      isValidRow = true;
     }
 
     return validRow;

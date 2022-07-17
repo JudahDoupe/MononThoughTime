@@ -40,7 +40,7 @@ public class MotherChunker : MonoBehaviour
     {
       right.x = 0;
     }
-    
+
 
     if (bottom.y < 0)
     {
@@ -100,8 +100,17 @@ public class MotherChunker : MonoBehaviour
 
 
     State current_chunk = null;
+    var inter = 0;
     while (frontier.Count > 0)
     {
+      inter++;
+      if (inter > 500)
+      {
+        print("loop 3");
+        break;
+      }
+
+      ;
       current_chunk = frontier.Dequeue();
 
       if (current_chunk.position.Equals(goal))
@@ -139,12 +148,21 @@ public class MotherChunker : MonoBehaviour
     }
 
     var current = goal;
-    while ( !current.Equals(new int2(-1, -1)) ||!current.Equals(start.position) )
+    inter = 0;
+    while (!current.Equals(new int2(-1, -1)) || !current.Equals(start.position))
     {
+      inter++;
+      if (inter > 500)
+      {
+        print("loop 4");
+        break;
+      }
+
       if (current.x == -1 && current.y == -1)
       {
         break;
       }
+
       path.Add(current);
       current = cameFrom[current];
     }
@@ -210,9 +228,16 @@ public class MotherChunker : MonoBehaviour
       row.Add(false);
     }
 
-
+    var inter = 0;
     while (row.Count < DimensionPicker.DimensionCount)
     {
+      inter++;
+      if (inter > 500)
+      {
+        print("loop 1");
+        break;
+      }
+
       row.Add(true);
     }
 
@@ -226,8 +251,15 @@ public class MotherChunker : MonoBehaviour
     var isValidRow = false;
 
     var validRow = new List<bool>();
+    var inter = 0;
     while (!isValidRow)
     {
+      inter++;
+      if (inter > 500)
+      {
+        print("loop 2");
+      }
+
       var newRow = GenerateRow();
       for (int i = 0; i < newRow.Count; i++)
       {
@@ -249,6 +281,20 @@ public class MotherChunker : MonoBehaviour
         }
       }
 
+      if (validPaths.Count == 0)
+      {
+        var backupRow = new List<bool>();
+        foreach (var dimension in DimensionPicker.AllDimensions)
+        {
+          var chunk = dimension.ActiveChunks.ToList()[MaxChunks - 2];
+          backupRow.Add(chunk);
+        }
+
+        validRow = backupRow;
+        break;
+      }
+
+
       if (validPaths.Count >= MinimumValidPaths)
       {
         validRow = newRow;
@@ -267,7 +313,7 @@ public class MotherChunker : MonoBehaviour
     {
       var dimension = DimensionPicker.AllDimensions[x];
       var chunks = dimension.ActiveChunks.ToList();
-      for (int y = 0; y < MaxChunks -1; y++)
+      for (int y = 0; y < MaxChunks - 1; y++)
       {
         chunkMap[new int2(x, y)] = chunks[y].GetComponent<Chunk>().isSafe;
       }

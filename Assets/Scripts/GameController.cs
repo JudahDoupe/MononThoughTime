@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         {
             GetComponent<MotherChunker>().ChunkSpeed += Acceleration * Time.deltaTime;
 
-            Stats.Distance += DimensionPicker.CurrentDimension.chunkSpeed * Time.deltaTime;
+            Stats.Distance += GetComponent<MotherChunker>().ChunkSpeed * Time.deltaTime;
 
         }
     }

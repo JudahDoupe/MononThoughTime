@@ -170,6 +170,19 @@ public class MotherChunker : MonoBehaviour
     return path;
   }
 
+  public void ResetChunks()
+  {
+    foreach (var dimension in DimensionPicker.AllDimensions)
+    {
+      foreach (var chunk in dimension.ActiveChunks)
+      {
+        Destroy(chunk);
+      }
+      dimension.ActiveChunks.Clear();
+    }
+    BuildInitialMap();
+  }
+  
   void BuildInitialMap()
   {
     foreach (var dimension in DimensionPicker.AllDimensions)

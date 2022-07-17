@@ -80,6 +80,7 @@ public class GameController : MonoBehaviour
         FindObjectOfType<Brainard>().ResetPlayer();
         Stats.DimensionChanges = 0;
         Stats.Distance = 0;
+        GetComponent<MotherChunker>().ResetChunks();
     }
 
     public enum GameState

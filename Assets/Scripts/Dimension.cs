@@ -16,8 +16,8 @@ public class Dimension : MonoBehaviour
   public void SpawnChunk(bool isSafe)
   {
     var chunk = isSafe
-      ? Instantiate(chunkPrefab[0], transform)
-      : Instantiate(dangerChunkPrefab[0], transform);
+      ? Instantiate(chunkPrefab[Convert.ToInt32(UnityEngine.Random.Range(0,chunkPrefab.Count))], transform)
+      : Instantiate(dangerChunkPrefab[Convert.ToInt32(UnityEngine.Random.Range(0, dangerChunkPrefab.Count))], transform);
     chunk.transform.localPosition = NextSpawnPosition();
     chunk.GetComponent<Chunk>().isSafe = isSafe;
     

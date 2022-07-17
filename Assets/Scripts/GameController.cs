@@ -61,6 +61,7 @@ public class GameController : MonoBehaviour
         PlayScreen.SetActive(true);
         State = GameState.Running;
         GameSpeed = 1;
+        FindObjectOfType<Brainard>().Run();
 
         DimensionPicker.PickDimension(DimensionPicker.CurrentDimensionIndex);
     }

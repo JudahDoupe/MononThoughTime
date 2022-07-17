@@ -24,6 +24,13 @@ public class Brainard : MonoBehaviour
     public float FallSpeed = 1;
     public AudioSource FallSound;
 
+    void Update()
+    {
+        if (GameController.State == GameController.GameState.Running)
+        {
+            GetComponentInChildren<Animator>().speed = GameController.GameSpeed;
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -40,6 +47,13 @@ public class Brainard : MonoBehaviour
         HP = Hearts.Count;
         UpdateVisualization();
         transform.localEulerAngles = Vector3.zero;
+        GetComponentInChildren<Animator>().Play("Idle");
+        GetComponentInChildren<Animator>().speed = 1;
+    }
+
+    public void Run()
+    {
+        GetComponentInChildren<Animator>().Play("Sprint");
     }
 
     private void TakeDamage()
@@ -86,15 +100,16 @@ public class Brainard : MonoBehaviour
 
     private IEnumerator Fall()
     {
+        GetComponentInChildren<Animator>().Play("Idle");
         FallSound.Play();
         var t = 0f;
         while (t < 1)
         {
-            transform.localEulerAngles = new Vector3(EaseOutElastic(t) * 90, 0, EaseOutElastic(t) * 30);
+            transform.localEulerAngles = new Vector3(EaseOutElastic(t) * -90, 0, EaseOutElastic(t) * 30);
             yield return new WaitForEndOfFrame();
             t += Time.deltaTime * FallSpeed;
         }
-        transform.localEulerAngles = new Vector3(90,0,30);
+        transform.localEulerAngles = new Vector3(-90,0,30);
     }
 
     private float EaseInElastic(float t)

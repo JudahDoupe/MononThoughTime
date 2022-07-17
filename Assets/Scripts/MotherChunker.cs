@@ -237,6 +237,10 @@ public class MotherChunker : MonoBehaviour
   List<bool> GenerateRow()
   {
     var deathNum = Convert.ToInt32(Math.Round(DeathRatio * DimensionPicker.DimensionCount));
+    if (deathNum == 0)
+    {
+      deathNum = 1;
+    }
     var row = new List<bool>();
     for (int i = 0; i < deathNum; i++)
     {
@@ -272,6 +276,13 @@ public class MotherChunker : MonoBehaviour
       inter++;
       if (inter > MaxWhileLoopIters)
       {
+        for (int _ = 0; _ < DimensionPicker.AllDimensions.Length; _++)
+        {
+          isValidRow = true;
+          validRow.Add(true);
+        }
+
+        break;
         print("loop 2");
       }
 

@@ -484,6 +484,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 644065286417396547, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}
+      propertyPath: blendDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 644065286417396547, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
       propertyPath: sharedProfile
       value: 
       objectReference: {fileID: 11400000, guid: 2e84004e7224bd04da87c3b2a17719e5,
@@ -1279,6 +1284,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 644065286417396547, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}
+      propertyPath: blendDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 644065286417396547, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
       propertyPath: sharedProfile
       value: 
       objectReference: {fileID: 11400000, guid: 40c7b5d4b7f11384688fe5484a53c72e,
@@ -1788,6 +1798,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 741507723}
     m_Modifications:
+    - target: {fileID: 644065286417396547, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: blendDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 644065286417396547, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}
       propertyPath: sharedProfile
@@ -2845,6 +2860,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 644065286417396547, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}
+      propertyPath: blendDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 644065286417396547, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
       propertyPath: sharedProfile
       value: 
       objectReference: {fileID: 11400000, guid: bfaa912a96be5d94ab213a5e0ca60023,
@@ -3177,6 +3197,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 741507723}
     m_Modifications:
+    - target: {fileID: 644065286417396547, guid: 1121589deca2e77478b636f041e203f2,
+        type: 3}
+      propertyPath: blendDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 644065286417396547, guid: 1121589deca2e77478b636f041e203f2,
         type: 3}
       propertyPath: sharedProfile
